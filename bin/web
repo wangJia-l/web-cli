@@ -12,7 +12,8 @@ program
     .description('创建一个新项目')
     .option('-f, --force', '如果当前文件存在，强制覆盖')
     .action((appName, cmd) => {
-        console.log(appName, cmd, '-----')
+        // 调用create模块实现
+        require('../lib/create')(appName, cmd);
     })
 
 // 配置更改配置文件命令
