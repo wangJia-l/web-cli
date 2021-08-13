@@ -1,0 +1,51 @@
+#! /usr/bin/env node
+
+// 1. 配置可执行命令 commander
+const program = require('commander');
+const chalk = require('chalk');
+
+// 核心功能： 1. 创建项目  2. 更改配置文件  3. UI界面 @vue/ui
+
+// 配置创建项目命令
+program
+    .command('create <app-name>')
+    .description('创建一个新项目')
+    .option('-f, --force', '如果当前文件存在，强制覆盖')
+    .action((appName, cmd) => {
+        console.log(appName, cmd, '-----')
+    })
+
+// 配置更改配置文件命令
+program
+    .command('config [value]')
+    .description('解析和更新配置文件')
+    .option('-g, --get <path>', '获取配置文件中的某个选项值')
+    .option('-s, --set <path> <value>', '设置配置文件中的某个选项值')
+    .option('-d, --delete <path>', '删除配置文件中的某个选项')
+    .action((value, cmd) => {
+        console.log(value, cmd, '-----')
+    })
+
+// 配置UI界面命令
+program
+    .command('ui')
+    .description('打开ui界面')
+    .option('-p, --port', '用于ui 服务的端口号')
+    .action((cmd) => {
+        console.log( cmd, '-----')
+    })
+
+// 配置版本号和Usage
+program
+    .version(`web-cli@${require('../package.json').version}`)
+    .usage(`<command> [options]`)
+
+
+program.on('--help', () => {
+    console.log();
+    console.log(`Run ${chalk.cyan('web-cli <command> --help')} show details`);
+    console.log();
+})
+
+// 解析用户执行命令时传入的参数
+program.parse(process.argv); 
